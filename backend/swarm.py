@@ -1,13 +1,18 @@
 import random
 import numpy as np
 import time
-import torch
-import psutil
 import math
 
-GRID_SIZE = 100
-NUM_DRONES = 3
-SECTOR_COUNT = 4
+import psutil
+
+from constants import GRID_SIZE, NUM_DRONES, SECTOR_COUNT
+from utils import (
+    apply_wind_drift,
+    clamp_to_bounds,
+    coverage_ratio,
+    find_drone,
+    get_device_info,
+)
 
 # ======================================================
 # DRONE CLASS
@@ -52,40 +57,21 @@ class Drone:
         self.y += step_y
 
         # ==================================================
-        # WIND DRIFT PHYSICS (UNCHANGED)
+        # WIND DRIFT PHYSICS
         # ==================================================
 
-        drift = wind_speed * 0.02
-
-        if wind_dir == "N":
-            self.y -= drift
-        elif wind_dir == "S":
-            self.y += drift
-        elif wind_dir == "E":
-            self.x += drift
-        elif wind_dir == "W":
-            self.x -= drift
-
-        # AI Compensation
-        self.x -= drift * 0.7
-        self.y -= drift * 0.7
+        self.x, self.y = apply_wind_drift(
+            self.x, self.y, wind_speed, wind_dir
+        )
 
         # ==================================================
         # SECTOR BOUNDARY CONTROL
         # ==================================================
 
-        if self.x <= self.sector[0]:
-            self.x = self.sector[0]
-        if self.x >= self.sector[1]:
-            self.x = self.sector[1]
-
-        if self.y <= 0:
-            self.y = 0
-        if self.y >= GRID_SIZE - 1:
-            self.y = GRID_SIZE - 1
+        self.x, self.y = clamp_to_bounds(self.x, self.y, self.sector)
 
         # ==================================================
-        # ENERGY SYSTEM (UNCHANGED)
+        # ENERGY SYSTEM
         # ==================================================
 
         self.energy -= 0.2
@@ -142,11 +128,7 @@ class Swarm:
         )
 
         # Performance
-        self.gpu_available = torch.cuda.is_available()
-        self.gpu_name = (
-            torch.cuda.get_device_name(0)
-            if self.gpu_available else "CPU"
-        )
+        _, self.gpu_name = get_device_info()
 
     # ==================================================
     # LOGGING
@@ -194,9 +176,7 @@ class Swarm:
     # ==================================================
 
     def update_coverage(self):
-        explored = np.count_nonzero(self.heatmap)
-        total = GRID_SIZE * GRID_SIZE
-        self.coverage = round((explored / total) * 100, 2)
+        self.coverage = coverage_ratio(self.heatmap)
 
     def calculate_sector_coverage(self):
 
@@ -206,12 +186,8 @@ class Swarm:
         for i in range(SECTOR_COUNT):
             start = i * sector_width
             end = (i + 1) * sector_width
-
             sector_area = self.heatmap[start:end, :]
-            explored = np.count_nonzero(sector_area)
-            total = sector_area.size
-
-            sectors[chr(65 + i)] = round((explored / total) * 100, 2)
+            sectors[chr(65 + i)] = coverage_ratio(sector_area)
 
         return sectors
 
@@ -220,22 +196,23 @@ class Swarm:
     # ==================================================
 
     def manual_move(self, drone_id, dx, dy):
-        for d in self.drones:
-            if d.id == drone_id:
+        d = find_drone(self.drones, drone_id)
+        if d is None:
+            return
 
-                d.x += dx
-                d.y += dy
+        d.x += dx
+        d.y += dy
+        d.x, d.y = clamp_to_bounds(d.x, d.y, d.sector)
 
-                d.x = max(d.sector[0], min(d.sector[1], d.x))
-                d.y = max(0, min(GRID_SIZE - 1, d.y))
-
-                self.log(f"Manual override: Drone {drone_id} moved")
+        self.log(f"Manual override: Drone {drone_id} moved")
 
     def set_direction(self, drone_id, direction):
-        for d in self.drones:
-            if d.id == drone_id:
-                d.direction = direction
-                self.log(f"Manual override: Drone {drone_id} direction changed")
+        d = find_drone(self.drones, drone_id)
+        if d is None:
+            return
+
+        d.direction = direction
+        self.log(f"Manual override: Drone {drone_id} direction changed")
 
     # ==================================================
     # PHASE ENGINE
