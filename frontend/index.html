@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AMD AI SWARM – FINALS COMMAND CENTER</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+body{
+margin:0;
+display:flex;
+background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+color:white;
+font-family:Segoe UI;
+overflow:hidden;
+}
+
+#left{flex:3;position:relative;}
+#right{
+flex:1.4;
+background:linear-gradient(180deg,#0f172a,#1e3a5f);
+padding:18px;
+overflow-y:auto;
+border-left:3px solid #00f0ff;
+}
+
+.title{
+font-size:22px;
+color:#00f0ff;
+margin-bottom:15px;
+font-weight:bold;
+}
+
+.panel{
+background:rgba(0,255,255,0.05);
+border:1px solid rgba(0,255,255,0.25);
+padding:12px;
+border-radius:10px;
+margin-bottom:14px;
+transition:0.3s;
+}
+.panel:hover{
+box-shadow:0 0 15px #00f0ff;
+}
+
+.energyBar{
+height:8px;
+background:#111;
+border-radius:8px;
+overflow:hidden;
+}
+.energyFill{
+height:100%;
+background:linear-gradient(90deg,#00ff88,#00f0ff);
+}
+
+#radar{
+position:absolute;
+bottom:20px;
+right:20px;
+width:150px;
+height:150px;
+border-radius:50%;
+border:3px solid #00f0ff;
+box-shadow:0 0 25px #00f0ff;
+}
+#radar::after{
+content:"";
+position:absolute;
+width:100%;
+height:100%;
+border-radius:50%;
+background:conic-gradient(#00f0ff 0deg, transparent 60deg);
+animation:spin 3s linear infinite;
+}
+@keyframes spin{
+from{transform:rotate(0deg);}
+to{transform:rotate(360deg);}
+}
+
+#miniMap{
+position:absolute;
+top:20px;
+right:20px;
+width:180px;
+height:180px;
+background:#001d3d;
+border:2px solid #00f0ff;
+}
+
+#log{
+height:120px;
+overflow-y:auto;
+font-size:12px;
+}
+</style>
+</head>
+
+<body>
+
+<div id="left">
+<canvas id="miniMap"></canvas>
+<div id="radar"></div>
+</div>
+
+<div id="right">
+
+<div class="title">🚁 AMD AI SWARM COMMAND</div>
+
+<div class="panel">
+Coverage: <span id="coverage">0</span>%<br>
+Mission Time: <span id="timer">0</span>s<br>
+Rescued: <span id="rescued">0</span>
+</div>
+
+<div class="panel">
+GPU: <span id="gpuName"></span><br>
+CPU: <span id="cpuUsage"></span>%<br>
+RAM: <span id="ramUsage"></span>%
+</div>
+
+<div class="panel">
+<b>Sector Coverage</b><br>
+A: <span id="sectorA">0%</span><br>
+B: <span id="sectorB">0%</span><br>
+C: <span id="sectorC">0%</span><br>
+D: <span id="sectorD">0%</span>
+</div>
+
+<div class="panel">
+<b>Drone Telemetry</b>
+<div id="droneStats"></div>
+</div>
+
+<div class="panel">
+<b>AI Decision Feed</b>
+<div id="log"></div>
+</div>
+
+<div class="panel">
+<canvas id="coverageChart"></canvas>
+</div>
+
+</div>
+
+<script>
+
+// ================== UTILS ==================
+
+function mapToTerrain(v){
+return (v-50)*4; // maps 0–100 → -200 to 200
+}
+
+function logAI(msg){
+let log=document.getElementById("log");
+log.innerHTML+="<div>» "+msg+"</div>";
+log.scrollTop=log.scrollHeight;
+}
+
+// ================== SCENE ==================
+
+let scene=new THREE.Scene();
+scene.fog=new THREE.FogExp2(0x0b1a2a,0.0018);
+
+let camera=new THREE.PerspectiveCamera(60,window.innerWidth*0.7/window.innerHeight,0.1,2000);
+camera.position.set(0,260,380);
+
+let renderer=new THREE.WebGLRenderer({antialias:true});
+renderer.setSize(window.innerWidth*0.7,window.innerHeight);
+renderer.shadowMap.enabled=true;
+document.getElementById("left").appendChild(renderer.domElement);
+
+let controls=new THREE.OrbitControls(camera,renderer.domElement);
+controls.enableDamping=true;
+
+scene.add(new THREE.AmbientLight(0xffffff,0.6));
+let sun=new THREE.DirectionalLight(0xffffff,1.3);
+sun.position.set(200,400,200);
+sun.castShadow=true;
+scene.add(sun);
+
+// ================== TERRAIN ==================
+
+let texLoader=new THREE.TextureLoader();
+let tex=texLoader.load("https://threejs.org/examples/textures/terrain/grasslight-big.jpg");
+
+let geo=new THREE.PlaneGeometry(400,400,128,128);
+let pos=geo.attributes.position;
+
+for(let i=0;i<pos.count;i++){
+let x=pos.getX(i);
+let y=pos.getY(i);
+pos.setZ(i,Math.sin(x*0.02)*8+Math.cos(y*0.02)*8);
+}
+geo.computeVertexNormals();
+
+let ground=new THREE.Mesh(
+geo,
+new THREE.MeshStandardMaterial({map:tex})
+);
+ground.rotation.x=-Math.PI/2;
+ground.receiveShadow=true;
+scene.add(ground);
+
+// ================== DISASTER ZONES ==================
+
+let disasterZones=[];
+for(let i=0;i<4;i++){
+let zone=new THREE.Mesh(
+new THREE.CircleGeometry(40,32),
+new THREE.MeshBasicMaterial({color:"red",transparent:true,opacity:0.25})
+);
+zone.rotation.x=-Math.PI/2;
+zone.position.set(Math.random()*300-150,2,Math.random()*300-150);
+scene.add(zone);
+disasterZones.push(zone);
+}
+
+// ================== DRONES ==================
+
+let drones=[], droneTargets=[], spotLights=[];
+
+function createDrone(){
+let g=new THREE.Group();
+
+// body
+let body=new THREE.BoxGeometry(12,3,12);
+let mat=new THREE.MeshStandardMaterial({color:"#00f0ff",emissive:"#00f0ff"});
+let m=new THREE.Mesh(body,mat);
+g.add(m);
+
+// blades
+for(let i=0;i<4;i++){
+let blade=new THREE.Mesh(
+new THREE.BoxGeometry(22,0.5,1),
+new THREE.MeshStandardMaterial({color:"#ffffff"})
+);
+blade.rotation.y=i*Math.PI/2;
+blade.position.y=2;
+g.add(blade);
+}
+
+// spotlight
+let light=new THREE.SpotLight(0x00ffff,2,250,Math.PI/6,0.5);
+light.castShadow=true;
+g.add(light);
+g.add(light.target);
+
+g.position.y=60;
+scene.add(g);
+
+spotLights.push(light);
+return g;
+}
+
+for(let i=0;i<3;i++){
+drones.push(createDrone());
+droneTargets.push(new THREE.Vector3());
+}
+
+// ================== HELICOPTER ==================
+
+let heli=new THREE.Group();
+
+// body
+let body=new THREE.Mesh(
+new THREE.CylinderGeometry(5,5,30,12),
+new THREE.MeshStandardMaterial({color:"#aaaaaa"})
+);
+body.rotation.z=Math.PI/2;
+heli.add(body);
+
+// tail
+let tail=new THREE.Mesh(
+new THREE.BoxGeometry(40,2,2),
+new THREE.MeshStandardMaterial({color:"#aaaaaa"})
+);
+tail.position.set(-35,0,0);
+heli.add(tail);
+
+// tail rotor
+let tailRotor=new THREE.Mesh(
+new THREE.BoxGeometry(8,0.5,1),
+new THREE.MeshStandardMaterial({color:"#000"})
+);
+tailRotor.position.set(-55,0,0);
+heli.add(tailRotor);
+
+// landing skids
+let skid1=new THREE.Mesh(
+new THREE.CylinderGeometry(1,1,30,8),
+new THREE.MeshStandardMaterial({color:"#333"})
+);
+skid1.rotation.z=Math.PI/2;
+skid1.position.y=-8;
+heli.add(skid1);
+
+// main rotor
+let mainRotor=new THREE.Mesh(
+new THREE.BoxGeometry(60,1,2),
+new THREE.MeshStandardMaterial({color:"#000"})
+);
+mainRotor.position.y=8;
+heli.add(mainRotor);
+
+heli.position.set(-250,150,0);
+scene.add(heli);
+
+let rope=new THREE.Line(
+new THREE.BufferGeometry().setFromPoints([
+new THREE.Vector3(0,-5,0),
+new THREE.Vector3(0,-5,0)
+]),
+new THREE.LineBasicMaterial({color:"#ffffff"})
+);
+heli.add(rope);
+rope.visible=false;
+
+let ropeLen=0;
+let extracting=false;
+let rescueTarget=null;
+
+// ================== SURVIVORS ==================
+
+let survivorGroup=new THREE.Group();
+scene.add(survivorGroup);
+
+function renderSurvivors(list){
+survivorGroup.clear();
+list.forEach(s=>{
+let isRescue=rescueTarget &&
+s.x===rescueTarget.x &&
+s.y===rescueTarget.y;
+
+let color=isRescue?"#00ff00":"#ff4444";
+
+let sphere=new THREE.Mesh(
+new THREE.SphereGeometry(6,16,16),
+new THREE.MeshStandardMaterial({color:color,emissive:color})
+);
+
+sphere.position.set(
+mapToTerrain(s.x),
+20,
+mapToTerrain(s.y)
+);
+
+survivorGroup.add(sphere);
+});
+}
+
+// ================== MINI MAP ==================
+
+let miniCtx=document.getElementById("miniMap").getContext("2d");
+
+// ================== CHART ==================
+
+let coverageChart=new Chart(document.getElementById("coverageChart"),{
+type:'line',
+data:{labels:[],datasets:[{
+data:[],
+borderColor:"#00ff88",
+backgroundColor:"rgba(0,255,136,0.2)"
+}]},
+options:{animation:false,plugins:{legend:{display:false}}}
+});
+
+// ================== WEBSOCKET ==================
+
+let ws;
+let wsReconnectDelay=1000;
+
+function connectWebSocket(){
+ws=new WebSocket("ws://127.0.0.1:8000/ws");
+
+ws.onopen=function(){
+logAI("Connected to backend");
+wsReconnectDelay=1000;
+};
+
+ws.onerror=function(err){
+console.error("WebSocket error:",err);
+logAI("Connection error — retrying...");
+};
+
+ws.onclose=function(event){
+console.warn("WebSocket closed (code "+event.code+"). Reconnecting in "+wsReconnectDelay+"ms...");
+logAI("Disconnected — reconnecting...");
+setTimeout(connectWebSocket,wsReconnectDelay);
+wsReconnectDelay=Math.min(wsReconnectDelay*2,30000);
+};
+
+ws.onmessage=function(event){
+let data;
+try{
+data=JSON.parse(event.data);
+}catch(e){
+console.error("Failed to parse WebSocket message:",e);
+return;
+}
+
+document.getElementById("coverage").innerText=data.coverage;
+document.getElementById("timer").innerText=data.mission_time;
+document.getElementById("rescued").innerText=data.rescued_count;
+
+document.getElementById("gpuName").innerText=data.performance.gpu_name;
+document.getElementById("cpuUsage").innerText=data.performance.cpu;
+document.getElementById("ramUsage").innerText=data.performance.ram;
+
+let txt="";
+data.drones.forEach((d,i)=>{
+droneTargets[i].set(
+mapToTerrain(d.x),
+60,
+mapToTerrain(d.y)
+);
+spotLights[i].target.position.set(
+mapToTerrain(d.x),
+0,
+mapToTerrain(d.y)
+);
+
+txt+=`Drone ${d.id} | Energy: ${d.energy}%`;
+txt+=`<div class="energyBar"><div class="energyFill" style="width:${d.energy}%"></div></div>`;
+});
+
+document.getElementById("droneStats").innerHTML=txt;
+
+if(data.rescue){
+rescueTarget=data.rescue;
+extracting=true;
+logAI("Rescue target detected at X:"+data.rescue.x+" Y:"+data.rescue.y);
+}
+
+renderSurvivors(data.survivors);
+
+coverageChart.data.labels.push("");
+coverageChart.data.datasets[0].data.push(data.coverage);
+coverageChart.update();
+
+// sector stats
+document.getElementById("sectorA").innerText=Math.floor(data.coverage*0.25)+"%";
+document.getElementById("sectorB").innerText=Math.floor(data.coverage*0.35)+"%";
+document.getElementById("sectorC").innerText=Math.floor(data.coverage*0.15)+"%";
+document.getElementById("sectorD").innerText=Math.floor(data.coverage*0.25)+"%";
+};
+}
+
+connectWebSocket();
+
+// ================== ANIMATE ==================
+
+function animate(){
+requestAnimationFrame(animate);
+
+// drone movement
+drones.forEach((d,i)=>{
+d.position.lerp(droneTargets[i],0.08);
+});
+
+// disaster pulse
+disasterZones.forEach(z=>{
+z.material.opacity=0.2+Math.sin(Date.now()*0.002)*0.1;
+});
+
+// helicopter extraction
+if(extracting && rescueTarget){
+
+let tx=mapToTerrain(rescueTarget.x);
+let tz=mapToTerrain(rescueTarget.y);
+
+heli.position.x+=(tx-heli.position.x)*0.04;
+heli.position.z+=(tz-heli.position.z)*0.04;
+
+if(heli.position.y>80){
+heli.position.y-=1;
+}else{
+rope.visible=true;
+if(ropeLen<80){
+ropeLen+=1;
+rope.geometry.setFromPoints([
+new THREE.Vector3(0,-5,0),
+new THREE.Vector3(0,-5-ropeLen,0)
+]);
+}
+}
+}
+
+// spin rotors
+heli.children[4].rotation.y+=0.5; // main rotor
+heli.children[2].rotation.z+=0.5; // tail rotor
+
+controls.update();
+renderer.render(scene,camera);
+}
+
+animate();
+
+</script>
+
+</body>
+</html>
