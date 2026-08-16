@@ -1,0 +1,49 @@
+{
+  "name": "disjoint_objects",
+  "description": "Detections that do not overlap (IoU <= 0.7) must stay separate heritage objects, including a near-miss box at IoU ~0.5.",
+  "expectations": [
+    "3 distinct objects",
+    "no conflicts"
+  ],
+  "events": [
+    {
+      "drone_id": "drone_001",
+      "timestamp": "2025-04-05T17:00:00Z",
+      "bbox": [
+        0,
+        0,
+        100,
+        100
+      ],
+      "class": "stepwell",
+      "confidence": 0.9,
+      "metadata": {}
+    },
+    {
+      "drone_id": "drone_002",
+      "timestamp": "2025-04-05T17:00:01Z",
+      "bbox": [
+        50,
+        50,
+        150,
+        150
+      ],
+      "class": "fort_wall",
+      "confidence": 0.9,
+      "metadata": {}
+    },
+    {
+      "drone_id": "drone_003",
+      "timestamp": "2025-04-05T17:00:02Z",
+      "bbox": [
+        900,
+        900,
+        1000,
+        1000
+      ],
+      "class": "cave_painting",
+      "confidence": 0.9,
+      "metadata": {}
+    }
+  ]
+}

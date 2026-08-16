@@ -1,0 +1,130 @@
+{
+  "objects": [
+    {
+      "object_id": "obj_4a38831be45e",
+      "class": "stepwell",
+      "confidence": 0.65,
+      "bbox": [
+        498.0,
+        503.0,
+        618.0,
+        641.0
+      ],
+      "first_seen": "2025-04-05T18:00:05Z",
+      "last_seen": "2025-04-05T18:00:06Z",
+      "resolved_by_event": "evt_37652ed451448fc6",
+      "created_by_event": "evt_4a38831be45e36cc",
+      "drone_ids": [
+        "drone_001",
+        "drone_004",
+        "drone_005"
+      ],
+      "detection_count": 3,
+      "class_frequency": {
+        "burial_mound": 1,
+        "stepwell": 2
+      }
+    },
+    {
+      "object_id": "obj_71f7b3116466",
+      "class": "temple_complex",
+      "confidence": 0.9,
+      "bbox": [
+        103.0,
+        98.0,
+        201.0,
+        199.0
+      ],
+      "first_seen": "2025-04-05T18:00:00Z",
+      "last_seen": "2025-04-05T18:00:02Z",
+      "resolved_by_event": "evt_9731dd8f814be16e",
+      "created_by_event": "evt_71f7b3116466b052",
+      "drone_ids": [
+        "drone_001",
+        "drone_002",
+        "drone_003"
+      ],
+      "detection_count": 3,
+      "class_frequency": {
+        "mosque_ruin": 1,
+        "temple_complex": 2
+      }
+    },
+    {
+      "object_id": "obj_984867dbe149",
+      "class": "petroglyph",
+      "confidence": 0.95,
+      "bbox": [
+        799.0,
+        201.0,
+        901.0,
+        299.0
+      ],
+      "first_seen": "2025-04-05T18:00:03Z",
+      "last_seen": "2025-04-05T18:00:12Z",
+      "resolved_by_event": "evt_534e0efd3bac4266",
+      "created_by_event": "evt_984867dbe149c8bc",
+      "drone_ids": [
+        "drone_006",
+        "drone_007"
+      ],
+      "detection_count": 3,
+      "class_frequency": {
+        "petroglyph": 2,
+        "rock_shelter": 1
+      }
+    },
+    {
+      "object_id": "obj_bdadc3c55dd7",
+      "class": "fort_wall",
+      "confidence": 0.88,
+      "bbox": [
+        1200.0,
+        1200.0,
+        1300.0,
+        1300.0
+      ],
+      "first_seen": "2025-04-05T18:00:04Z",
+      "last_seen": "2025-04-05T18:00:04Z",
+      "resolved_by_event": "evt_bdadc3c55dd7780d",
+      "created_by_event": "evt_bdadc3c55dd7780d",
+      "drone_ids": [
+        "drone_008"
+      ],
+      "detection_count": 1,
+      "class_frequency": {
+        "fort_wall": 1
+      }
+    }
+  ],
+  "object_count": 4,
+  "event_count": 10,
+  "decision_count": 10,
+  "last_event_timestamp": "2025-04-05T18:00:12Z",
+  "config": {
+    "iou_threshold": 0.7,
+    "drone_reliability": {
+      "drone_001": 0.95,
+      "drone_002": 0.9,
+      "drone_003": 0.85,
+      "drone_004": 0.8,
+      "drone_005": 0.7,
+      "drone_006": 0.6,
+      "drone_007": 0.55,
+      "drone_008": 0.5,
+      "drone_009": 0.45
+    },
+    "default_reliability": 0.5,
+    "confidence_precision": 6,
+    "conflict_window_seconds": null,
+    "rule_order": [
+      "higher_confidence",
+      "newer_timestamp",
+      "higher_drone_reliability",
+      "higher_historical_class_frequency",
+      "lexicographic_event_id"
+    ],
+    "strict_duplicate_drone_timestamp": false
+  },
+  "state_digest": "3a6ded080adb365284e1b24c72b2babdeda25dfd420f29bc1a0d972646d6df9b"
+}

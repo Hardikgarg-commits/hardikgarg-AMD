@@ -1,0 +1,169 @@
+{
+  "name": "mixed_edge_cases",
+  "description": "Interleaved stream combining all edge cases at once: duplicates, late events, multi-drone conflicts, class flap/revert, reliability tie-break and disjoint objects sharing the same surveillance zone.",
+  "expectations": [
+    "4 objects",
+    "duplicates skipped",
+    "multiple conflict types in the audit trail"
+  ],
+  "events": [
+    {
+      "drone_id": "drone_001",
+      "timestamp": "2025-04-05T18:00:00Z",
+      "bbox": [
+        100,
+        100,
+        200,
+        200
+      ],
+      "class": "temple_complex",
+      "confidence": 0.81,
+      "metadata": {
+        "lighting": "day"
+      }
+    },
+    {
+      "drone_id": "drone_002",
+      "timestamp": "2025-04-05T18:00:02Z",
+      "bbox": [
+        103,
+        98,
+        201,
+        199
+      ],
+      "class": "mosque_ruin",
+      "confidence": 0.86,
+      "metadata": {
+        "lighting": "glare",
+        "occlusion": "partial"
+      }
+    },
+    {
+      "drone_id": "drone_001",
+      "timestamp": "2025-04-05T18:00:00Z",
+      "bbox": [
+        100,
+        100,
+        200,
+        200
+      ],
+      "class": "temple_complex",
+      "confidence": 0.81,
+      "metadata": {
+        "lighting": "day"
+      }
+    },
+    {
+      "drone_id": "drone_003",
+      "timestamp": "2025-04-05T18:00:01Z",
+      "bbox": [
+        99,
+        101,
+        199,
+        202
+      ],
+      "class": "temple_complex",
+      "confidence": 0.9,
+      "metadata": {
+        "lighting": "day"
+      }
+    },
+    {
+      "drone_id": "drone_004",
+      "timestamp": "2025-04-05T18:00:05Z",
+      "bbox": [
+        500,
+        500,
+        620,
+        640
+      ],
+      "class": "stepwell",
+      "confidence": 0.65,
+      "metadata": {
+        "occlusion": "heavy"
+      }
+    },
+    {
+      "drone_id": "drone_005",
+      "timestamp": "2025-04-05T18:00:06Z",
+      "bbox": [
+        498,
+        503,
+        618,
+        641
+      ],
+      "class": "burial_mound",
+      "confidence": 0.65,
+      "metadata": {
+        "occlusion": "heavy"
+      }
+    },
+    {
+      "drone_id": "drone_001",
+      "timestamp": "2025-04-05T18:00:06Z",
+      "bbox": [
+        502,
+        499,
+        621,
+        639
+      ],
+      "class": "stepwell",
+      "confidence": 0.65,
+      "metadata": {
+        "occlusion": "none"
+      }
+    },
+    {
+      "drone_id": "drone_006",
+      "timestamp": "2025-04-05T18:00:03Z",
+      "bbox": [
+        800,
+        200,
+        900,
+        300
+      ],
+      "class": "petroglyph",
+      "confidence": 0.77,
+      "metadata": {}
+    },
+    {
+      "drone_id": "drone_006",
+      "timestamp": "2025-04-05T18:00:09Z",
+      "bbox": [
+        801,
+        199,
+        899,
+        301
+      ],
+      "class": "rock_shelter",
+      "confidence": 0.79,
+      "metadata": {}
+    },
+    {
+      "drone_id": "drone_007",
+      "timestamp": "2025-04-05T18:00:12Z",
+      "bbox": [
+        799,
+        201,
+        901,
+        299
+      ],
+      "class": "petroglyph",
+      "confidence": 0.95,
+      "metadata": {}
+    },
+    {
+      "drone_id": "drone_008",
+      "timestamp": "2025-04-05T18:00:04Z",
+      "bbox": [
+        1200,
+        1200,
+        1300,
+        1300
+      ],
+      "class": "fort_wall",
+      "confidence": 0.88,
+      "metadata": {}
+    }
+  ]
+}

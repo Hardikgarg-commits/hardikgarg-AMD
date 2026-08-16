@@ -1,0 +1,42 @@
+{
+  "name": "conflicting_classes",
+  "description": "Two drones observe the same object (IoU > 0.7) but disagree on the class label. Confidence decides the winner.",
+  "expectations": [
+    "1 object",
+    "conflicting_class_labels conflict",
+    "rule higher_confidence",
+    "final class stone_inscription"
+  ],
+  "events": [
+    {
+      "drone_id": "drone_001",
+      "timestamp": "2025-04-05T13:00:00Z",
+      "bbox": [
+        50,
+        60,
+        150,
+        170
+      ],
+      "class": "cave_painting",
+      "confidence": 0.72,
+      "metadata": {
+        "occlusion": "partial"
+      }
+    },
+    {
+      "drone_id": "drone_004",
+      "timestamp": "2025-04-05T13:00:05Z",
+      "bbox": [
+        52,
+        62,
+        149,
+        168
+      ],
+      "class": "stone_inscription",
+      "confidence": 0.88,
+      "metadata": {
+        "occlusion": "none"
+      }
+    }
+  ]
+}

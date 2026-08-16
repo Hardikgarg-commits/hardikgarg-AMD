@@ -1,0 +1,165 @@
+[
+  {
+    "event_id": "evt_71f7b3116466b052",
+    "drone_id": "drone_001",
+    "timestamp": "2025-04-05T18:00:00Z",
+    "bbox": [
+      100.0,
+      100.0,
+      200.0,
+      200.0
+    ],
+    "class": "temple_complex",
+    "confidence": 0.81,
+    "metadata": {
+      "lighting": "day"
+    },
+    "dedup_key": "drone_001|2025-04-05T18:00:00Z|100.0000,100.0000,200.0000,200.0000"
+  },
+  {
+    "event_id": "evt_9731dd8f814be16e",
+    "drone_id": "drone_003",
+    "timestamp": "2025-04-05T18:00:01Z",
+    "bbox": [
+      99.0,
+      101.0,
+      199.0,
+      202.0
+    ],
+    "class": "temple_complex",
+    "confidence": 0.9,
+    "metadata": {
+      "lighting": "day"
+    },
+    "dedup_key": "drone_003|2025-04-05T18:00:01Z|99.0000,101.0000,199.0000,202.0000"
+  },
+  {
+    "event_id": "evt_cf3337810c504bb8",
+    "drone_id": "drone_002",
+    "timestamp": "2025-04-05T18:00:02Z",
+    "bbox": [
+      103.0,
+      98.0,
+      201.0,
+      199.0
+    ],
+    "class": "mosque_ruin",
+    "confidence": 0.86,
+    "metadata": {
+      "lighting": "glare",
+      "occlusion": "partial"
+    },
+    "dedup_key": "drone_002|2025-04-05T18:00:02Z|103.0000,98.0000,201.0000,199.0000"
+  },
+  {
+    "event_id": "evt_984867dbe149c8bc",
+    "drone_id": "drone_006",
+    "timestamp": "2025-04-05T18:00:03Z",
+    "bbox": [
+      800.0,
+      200.0,
+      900.0,
+      300.0
+    ],
+    "class": "petroglyph",
+    "confidence": 0.77,
+    "metadata": {},
+    "dedup_key": "drone_006|2025-04-05T18:00:03Z|800.0000,200.0000,900.0000,300.0000"
+  },
+  {
+    "event_id": "evt_bdadc3c55dd7780d",
+    "drone_id": "drone_008",
+    "timestamp": "2025-04-05T18:00:04Z",
+    "bbox": [
+      1200.0,
+      1200.0,
+      1300.0,
+      1300.0
+    ],
+    "class": "fort_wall",
+    "confidence": 0.88,
+    "metadata": {},
+    "dedup_key": "drone_008|2025-04-05T18:00:04Z|1200.0000,1200.0000,1300.0000,1300.0000"
+  },
+  {
+    "event_id": "evt_4a38831be45e36cc",
+    "drone_id": "drone_004",
+    "timestamp": "2025-04-05T18:00:05Z",
+    "bbox": [
+      500.0,
+      500.0,
+      620.0,
+      640.0
+    ],
+    "class": "stepwell",
+    "confidence": 0.65,
+    "metadata": {
+      "occlusion": "heavy"
+    },
+    "dedup_key": "drone_004|2025-04-05T18:00:05Z|500.0000,500.0000,620.0000,640.0000"
+  },
+  {
+    "event_id": "evt_37652ed451448fc6",
+    "drone_id": "drone_001",
+    "timestamp": "2025-04-05T18:00:06Z",
+    "bbox": [
+      502.0,
+      499.0,
+      621.0,
+      639.0
+    ],
+    "class": "stepwell",
+    "confidence": 0.65,
+    "metadata": {
+      "occlusion": "none"
+    },
+    "dedup_key": "drone_001|2025-04-05T18:00:06Z|502.0000,499.0000,621.0000,639.0000"
+  },
+  {
+    "event_id": "evt_3186dcf76d4eda04",
+    "drone_id": "drone_005",
+    "timestamp": "2025-04-05T18:00:06Z",
+    "bbox": [
+      498.0,
+      503.0,
+      618.0,
+      641.0
+    ],
+    "class": "burial_mound",
+    "confidence": 0.65,
+    "metadata": {
+      "occlusion": "heavy"
+    },
+    "dedup_key": "drone_005|2025-04-05T18:00:06Z|498.0000,503.0000,618.0000,641.0000"
+  },
+  {
+    "event_id": "evt_cd1f13fa1ea2650d",
+    "drone_id": "drone_006",
+    "timestamp": "2025-04-05T18:00:09Z",
+    "bbox": [
+      801.0,
+      199.0,
+      899.0,
+      301.0
+    ],
+    "class": "rock_shelter",
+    "confidence": 0.79,
+    "metadata": {},
+    "dedup_key": "drone_006|2025-04-05T18:00:09Z|801.0000,199.0000,899.0000,301.0000"
+  },
+  {
+    "event_id": "evt_534e0efd3bac4266",
+    "drone_id": "drone_007",
+    "timestamp": "2025-04-05T18:00:12Z",
+    "bbox": [
+      799.0,
+      201.0,
+      901.0,
+      299.0
+    ],
+    "class": "petroglyph",
+    "confidence": 0.95,
+    "metadata": {},
+    "dedup_key": "drone_007|2025-04-05T18:00:12Z|799.0000,201.0000,901.0000,299.0000"
+  }
+]
