@@ -16,7 +16,6 @@ import json
 import sys
 from pathlib import Path
 
-import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
@@ -127,45 +126,48 @@ tab_state, tab_timeline, tab_audit, tab_map, tab_events = st.tabs(
 with tab_state:
     if state["objects"]:
         st.dataframe(
-            pd.DataFrame(
-                [
-                    {
-                        "object_id": obj["object_id"],
-                        "class": obj["class"],
-                        "confidence": obj["confidence"],
-                        "drones": ", ".join(obj["drone_ids"]),
-                        "detections": obj["detection_count"],
-                        "first_seen": obj["first_seen"],
-                        "last_seen": obj["last_seen"],
-                        "class_frequency": json.dumps(obj["class_frequency"]),
-                    }
-                    for obj in state["objects"]
-                ]
-            ),
-            use_container_width=True,
+            [
+                {
+                    "object_id": obj["object_id"],
+                    "class": obj["class"],
+                    "confidence": obj["confidence"],
+                    "drones": ", ".join(obj["drone_ids"]),
+                    "detections": obj["detection_count"],
+                    "first_seen": obj["first_seen"],
+                    "last_seen": obj["last_seen"],
+                    "class_frequency": json.dumps(obj["class_frequency"]),
+                }
+                for obj in state["objects"]
+            ],
+            width="stretch",
             hide_index=True,
         )
         st.plotly_chart(
             px.bar(
-                pd.DataFrame(state["objects"]),
+                {
+                    "object_id": [obj["object_id"] for obj in state["objects"]],
+                    "confidence": [obj["confidence"] for obj in state["objects"]],
+                    "class": [obj["class"] for obj in state["objects"]],
+                },
                 x="object_id",
                 y="confidence",
                 color="class",
                 title="Resolved class and confidence per heritage object",
             ),
-            use_container_width=True,
+            width="stretch",
         )
     else:
         st.info("No state yet — replay a fixture from the sidebar.")
 
 with tab_timeline:
     if timeline:
-        frame = pd.DataFrame(timeline)
-        frame["timestamp"] = pd.to_datetime(frame["timestamp"])
-        frame["conflicts"] = frame["conflicts"].apply(lambda items: ", ".join(items))
+        rows = [
+            {**item, "conflicts": ", ".join(item["conflicts"])} for item in timeline
+        ]
+        columns = {key: [row[key] for row in rows] for key in rows[0]}
         st.plotly_chart(
             px.scatter(
-                frame,
+                columns,
                 x="timestamp",
                 y="object_id",
                 color="class",
@@ -173,13 +175,13 @@ with tab_timeline:
                 hover_data=["drone_id", "resolution_rule", "conflicts", "confidence"],
                 title="Deterministic detection timeline",
             ),
-            use_container_width=True,
+            width="stretch",
         )
-        st.dataframe(frame, use_container_width=True, hide_index=True)
+        st.dataframe(rows, width="stretch", hide_index=True)
         late = engine.late_arrivals()
         if late:
             st.subheader("Late arrivals (re-derivations)")
-            st.dataframe(pd.DataFrame(late), use_container_width=True, hide_index=True)
+            st.dataframe(late, width="stretch", hide_index=True)
     else:
         st.info("No timeline yet — replay a fixture from the sidebar.")
 
@@ -208,15 +210,24 @@ with tab_audit:
             right.json(entry["state_after"])
             st.subheader("Events considered")
             st.dataframe(
-                pd.DataFrame(entry["input_events_considered"]),
-                use_container_width=True,
+                [
+                    {**event, "metadata": json.dumps(event["metadata"])}
+                    for event in entry["input_events_considered"]
+                ],
+                width="stretch",
                 hide_index=True,
             )
             if entry["rule_evaluations"]:
                 st.subheader("Rule evaluation order")
                 st.dataframe(
-                    pd.DataFrame(entry["rule_evaluations"]),
-                    use_container_width=True,
+                    [
+                        {
+                            key: value if key == "rule" else json.dumps(value)
+                            for key, value in evaluation.items()
+                        }
+                        for evaluation in entry["rule_evaluations"]
+                    ],
+                    width="stretch",
                     hide_index=True,
                 )
 
@@ -250,14 +261,19 @@ with tab_map:
             yaxis={"autorange": "reversed"},
             height=600,
         )
-        st.plotly_chart(figure, use_container_width=True)
+        st.plotly_chart(figure, width="stretch")
     else:
         st.info("No objects to draw yet.")
 
 with tab_events:
     if engine.event_log:
         st.dataframe(
-            pd.DataFrame(engine.event_log), use_container_width=True, hide_index=True
+            [
+                {**event, "metadata": json.dumps(event.get("metadata", {}))}
+                for event in engine.event_log
+            ],
+            width="stretch",
+            hide_index=True,
         )
         st.download_button(
             "Download event log (JSON)",
