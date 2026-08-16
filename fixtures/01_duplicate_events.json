@@ -1,0 +1,59 @@
+{
+  "name": "duplicate_events",
+  "description": "Idempotency: the same drone re-sends an identical detection (same drone_id + timestamp + bbox) three times. Only the first ingest changes state; later ones are duplicates (HTTP 409).",
+  "expectations": [
+    "1 heritage object",
+    "2 duplicates rejected",
+    "state unchanged by duplicates"
+  ],
+  "events": [
+    {
+      "drone_id": "drone_001",
+      "timestamp": "2025-04-05T12:30:00Z",
+      "bbox": [
+        100,
+        100,
+        200,
+        200
+      ],
+      "class": "archaeological_site",
+      "confidence": 0.87,
+      "metadata": {
+        "lighting": "low",
+        "occlusion": "partial"
+      }
+    },
+    {
+      "drone_id": "drone_001",
+      "timestamp": "2025-04-05T12:30:00Z",
+      "bbox": [
+        100,
+        100,
+        200,
+        200
+      ],
+      "class": "archaeological_site",
+      "confidence": 0.87,
+      "metadata": {
+        "lighting": "low",
+        "occlusion": "partial"
+      }
+    },
+    {
+      "drone_id": "drone_001",
+      "timestamp": "2025-04-05T12:30:00Z",
+      "bbox": [
+        100,
+        100,
+        200,
+        200
+      ],
+      "class": "archaeological_site",
+      "confidence": 0.91,
+      "metadata": {
+        "lighting": "bright",
+        "occlusion": "none"
+      }
+    }
+  ]
+}

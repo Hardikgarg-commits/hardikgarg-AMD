@@ -1,0 +1,57 @@
+{
+  "name": "multi_drone_reliability_tiebreak",
+  "description": "Three drones report the same object with IDENTICAL confidence and timestamp but different labels; drone reliability breaks the tie (drone_001=0.95 in config/drones.json).",
+  "expectations": [
+    "1 object",
+    "multi_drone_same_object conflict",
+    "rule higher_drone_reliability",
+    "final class fort_wall"
+  ],
+  "events": [
+    {
+      "drone_id": "drone_005",
+      "timestamp": "2025-04-05T14:00:00Z",
+      "bbox": [
+        400,
+        400,
+        500,
+        520
+      ],
+      "class": "stepwell",
+      "confidence": 0.8,
+      "metadata": {
+        "lighting": "low"
+      }
+    },
+    {
+      "drone_id": "drone_006",
+      "timestamp": "2025-04-05T14:00:00Z",
+      "bbox": [
+        404,
+        396,
+        502,
+        519
+      ],
+      "class": "burial_mound",
+      "confidence": 0.8,
+      "metadata": {
+        "lighting": "low"
+      }
+    },
+    {
+      "drone_id": "drone_001",
+      "timestamp": "2025-04-05T14:00:00Z",
+      "bbox": [
+        398,
+        402,
+        499,
+        521
+      ],
+      "class": "fort_wall",
+      "confidence": 0.8,
+      "metadata": {
+        "lighting": "low"
+      }
+    }
+  ]
+}

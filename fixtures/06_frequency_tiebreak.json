@@ -1,0 +1,63 @@
+{
+  "name": "frequency_tiebreak",
+  "description": "Confidence, timestamp and reliability all tie between two competing labels, so the historically most frequent class wins.",
+  "expectations": [
+    "1 object",
+    "rule higher_historical_class_frequency",
+    "final class rock_shelter"
+  ],
+  "events": [
+    {
+      "drone_id": "drone_009",
+      "timestamp": "2025-04-05T16:00:00Z",
+      "bbox": [
+        10,
+        10,
+        110,
+        110
+      ],
+      "class": "rock_shelter",
+      "confidence": 0.75,
+      "metadata": {}
+    },
+    {
+      "drone_id": "drone_009",
+      "timestamp": "2025-04-05T16:00:05Z",
+      "bbox": [
+        11,
+        9,
+        109,
+        111
+      ],
+      "class": "rock_shelter",
+      "confidence": 0.75,
+      "metadata": {}
+    },
+    {
+      "drone_id": "drone_009",
+      "timestamp": "2025-04-05T16:00:10Z",
+      "bbox": [
+        10,
+        11,
+        110,
+        109
+      ],
+      "class": "petroglyph",
+      "confidence": 0.75,
+      "metadata": {}
+    },
+    {
+      "drone_id": "drone_009",
+      "timestamp": "2025-04-05T16:00:10Z",
+      "bbox": [
+        9,
+        10,
+        111,
+        110
+      ],
+      "class": "rock_shelter",
+      "confidence": 0.75,
+      "metadata": {}
+    }
+  ]
+}

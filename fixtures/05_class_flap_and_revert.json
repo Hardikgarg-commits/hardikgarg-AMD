@@ -1,0 +1,56 @@
+{
+  "name": "class_flap_and_revert",
+  "description": "Model drift makes the resolved class flip away and then revert. Exercises class_change_over_time plus class_reverted (historical consistency) audit signals.",
+  "expectations": [
+    "1 object",
+    "class_change_over_time then class_reverted",
+    "final class temple_complex"
+  ],
+  "events": [
+    {
+      "drone_id": "drone_007",
+      "timestamp": "2025-04-05T15:00:00Z",
+      "bbox": [
+        600,
+        600,
+        700,
+        700
+      ],
+      "class": "temple_complex",
+      "confidence": 0.7,
+      "metadata": {
+        "lighting": "day"
+      }
+    },
+    {
+      "drone_id": "drone_008",
+      "timestamp": "2025-04-05T15:00:10Z",
+      "bbox": [
+        602,
+        601,
+        701,
+        699
+      ],
+      "class": "mosque_ruin",
+      "confidence": 0.82,
+      "metadata": {
+        "lighting": "glare"
+      }
+    },
+    {
+      "drone_id": "drone_007",
+      "timestamp": "2025-04-05T15:00:20Z",
+      "bbox": [
+        601,
+        599,
+        700,
+        701
+      ],
+      "class": "temple_complex",
+      "confidence": 0.94,
+      "metadata": {
+        "lighting": "day"
+      }
+    }
+  ]
+}

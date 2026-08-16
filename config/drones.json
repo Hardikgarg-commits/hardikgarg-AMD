@@ -1,0 +1,25 @@
+{
+  "confidence_precision": 6,
+  "conflict_window_seconds": null,
+  "default_reliability": 0.5,
+  "drone_reliability": {
+    "drone_001": 0.95,
+    "drone_002": 0.9,
+    "drone_003": 0.85,
+    "drone_004": 0.8,
+    "drone_005": 0.7,
+    "drone_006": 0.6,
+    "drone_007": 0.55,
+    "drone_008": 0.5,
+    "drone_009": 0.45
+  },
+  "iou_threshold": 0.7,
+  "rule_order": [
+    "higher_confidence",
+    "newer_timestamp",
+    "higher_drone_reliability",
+    "higher_historical_class_frequency",
+    "lexicographic_event_id"
+  ],
+  "strict_duplicate_drone_timestamp": false
+}

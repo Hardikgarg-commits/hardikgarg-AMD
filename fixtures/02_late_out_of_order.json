@@ -1,0 +1,56 @@
+{
+  "name": "late_out_of_order",
+  "description": "Out-of-order arrival: a high-confidence detection with an OLDER timestamp arrives after a newer low-confidence one. The engine re-derives state in canonical order so the result equals a clean replay.",
+  "expectations": [
+    "1 heritage object",
+    "late event triggers rebuild",
+    "final class temple_complex (highest confidence)"
+  ],
+  "events": [
+    {
+      "drone_id": "drone_002",
+      "timestamp": "2025-04-05T12:31:00Z",
+      "bbox": [
+        300,
+        300,
+        420,
+        430
+      ],
+      "class": "rock_shelter",
+      "confidence": 0.55,
+      "metadata": {
+        "lighting": "dusk"
+      }
+    },
+    {
+      "drone_id": "drone_002",
+      "timestamp": "2025-04-05T12:30:30Z",
+      "bbox": [
+        302,
+        298,
+        421,
+        429
+      ],
+      "class": "temple_complex",
+      "confidence": 0.93,
+      "metadata": {
+        "lighting": "day"
+      }
+    },
+    {
+      "drone_id": "drone_003",
+      "timestamp": "2025-04-05T12:30:45Z",
+      "bbox": [
+        299,
+        301,
+        419,
+        431
+      ],
+      "class": "rock_shelter",
+      "confidence": 0.61,
+      "metadata": {
+        "lighting": "day"
+      }
+    }
+  ]
+}

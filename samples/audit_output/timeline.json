@@ -1,0 +1,140 @@
+[
+  {
+    "sequence": 1,
+    "decision_id": "dec_000001",
+    "timestamp": "2025-04-05T18:00:00Z",
+    "object_id": "obj_71f7b3116466",
+    "event": "object_created",
+    "class": "temple_complex",
+    "confidence": 0.81,
+    "drone_id": "drone_001",
+    "conflicts": [],
+    "resolution_rule": "initial_detection"
+  },
+  {
+    "sequence": 2,
+    "decision_id": "dec_000002",
+    "timestamp": "2025-04-05T18:00:01Z",
+    "object_id": "obj_71f7b3116466",
+    "event": "observation",
+    "class": "temple_complex",
+    "confidence": 0.9,
+    "drone_id": "drone_003",
+    "conflicts": [
+      "multi_drone_same_object"
+    ],
+    "resolution_rule": "unanimous_class"
+  },
+  {
+    "sequence": 3,
+    "decision_id": "dec_000003",
+    "timestamp": "2025-04-05T18:00:02Z",
+    "object_id": "obj_71f7b3116466",
+    "event": "observation",
+    "class": "temple_complex",
+    "confidence": 0.9,
+    "drone_id": "drone_002",
+    "conflicts": [
+      "multi_drone_same_object",
+      "conflicting_class_labels"
+    ],
+    "resolution_rule": "higher_confidence"
+  },
+  {
+    "sequence": 4,
+    "decision_id": "dec_000004",
+    "timestamp": "2025-04-05T18:00:03Z",
+    "object_id": "obj_984867dbe149",
+    "event": "object_created",
+    "class": "petroglyph",
+    "confidence": 0.77,
+    "drone_id": "drone_006",
+    "conflicts": [],
+    "resolution_rule": "initial_detection"
+  },
+  {
+    "sequence": 5,
+    "decision_id": "dec_000005",
+    "timestamp": "2025-04-05T18:00:04Z",
+    "object_id": "obj_bdadc3c55dd7",
+    "event": "object_created",
+    "class": "fort_wall",
+    "confidence": 0.88,
+    "drone_id": "drone_008",
+    "conflicts": [],
+    "resolution_rule": "initial_detection"
+  },
+  {
+    "sequence": 6,
+    "decision_id": "dec_000006",
+    "timestamp": "2025-04-05T18:00:05Z",
+    "object_id": "obj_4a38831be45e",
+    "event": "object_created",
+    "class": "stepwell",
+    "confidence": 0.65,
+    "drone_id": "drone_004",
+    "conflicts": [],
+    "resolution_rule": "initial_detection"
+  },
+  {
+    "sequence": 7,
+    "decision_id": "dec_000007",
+    "timestamp": "2025-04-05T18:00:06Z",
+    "object_id": "obj_4a38831be45e",
+    "event": "observation",
+    "class": "stepwell",
+    "confidence": 0.65,
+    "drone_id": "drone_001",
+    "conflicts": [
+      "multi_drone_same_object"
+    ],
+    "resolution_rule": "unanimous_class"
+  },
+  {
+    "sequence": 8,
+    "decision_id": "dec_000008",
+    "timestamp": "2025-04-05T18:00:06Z",
+    "object_id": "obj_4a38831be45e",
+    "event": "observation",
+    "class": "stepwell",
+    "confidence": 0.65,
+    "drone_id": "drone_005",
+    "conflicts": [
+      "multi_drone_same_object",
+      "conflicting_class_labels"
+    ],
+    "resolution_rule": "higher_drone_reliability"
+  },
+  {
+    "sequence": 9,
+    "decision_id": "dec_000009",
+    "timestamp": "2025-04-05T18:00:09Z",
+    "object_id": "obj_984867dbe149",
+    "event": "class_changed",
+    "class": "rock_shelter",
+    "confidence": 0.79,
+    "drone_id": "drone_006",
+    "conflicts": [
+      "conflicting_class_labels",
+      "class_change_over_time"
+    ],
+    "resolution_rule": "higher_confidence"
+  },
+  {
+    "sequence": 10,
+    "decision_id": "dec_000010",
+    "timestamp": "2025-04-05T18:00:12Z",
+    "object_id": "obj_984867dbe149",
+    "event": "class_changed",
+    "class": "petroglyph",
+    "confidence": 0.95,
+    "drone_id": "drone_007",
+    "conflicts": [
+      "multi_drone_same_object",
+      "conflicting_class_labels",
+      "class_change_over_time",
+      "class_reverted"
+    ],
+    "resolution_rule": "higher_confidence"
+  }
+]

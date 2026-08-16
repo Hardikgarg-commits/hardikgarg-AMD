@@ -1,0 +1,1162 @@
+[
+  {
+    "decision_id": "dec_000001",
+    "sequence": 1,
+    "object_id": "obj_71f7b3116466",
+    "decision_timestamp": "2025-04-05T18:00:00Z",
+    "trigger_event": {
+      "event_id": "evt_71f7b3116466b052",
+      "drone_id": "drone_001",
+      "timestamp": "2025-04-05T18:00:00Z",
+      "bbox": [
+        100.0,
+        100.0,
+        200.0,
+        200.0
+      ],
+      "class": "temple_complex",
+      "confidence": 0.81,
+      "metadata": {
+        "lighting": "day"
+      }
+    },
+    "match_iou": null,
+    "input_events_considered": [
+      {
+        "event_id": "evt_71f7b3116466b052",
+        "drone_id": "drone_001",
+        "timestamp": "2025-04-05T18:00:00Z",
+        "bbox": [
+          100.0,
+          100.0,
+          200.0,
+          200.0
+        ],
+        "class": "temple_complex",
+        "confidence": 0.81,
+        "metadata": {
+          "lighting": "day"
+        }
+      }
+    ],
+    "conflicts": [],
+    "resolution_rule": "initial_detection",
+    "rule_order": [
+      "higher_confidence",
+      "newer_timestamp",
+      "higher_drone_reliability",
+      "higher_historical_class_frequency",
+      "lexicographic_event_id"
+    ],
+    "rule_evaluations": [],
+    "final_class": "temple_complex",
+    "final_confidence": 0.81,
+    "state_before": null,
+    "state_after": {
+      "object_id": "obj_71f7b3116466",
+      "class": "temple_complex",
+      "confidence": 0.81,
+      "bbox": [
+        100.0,
+        100.0,
+        200.0,
+        200.0
+      ],
+      "first_seen": "2025-04-05T18:00:00Z",
+      "last_seen": "2025-04-05T18:00:00Z",
+      "resolved_by_event": "evt_71f7b3116466b052",
+      "created_by_event": "evt_71f7b3116466b052",
+      "drone_ids": [
+        "drone_001"
+      ],
+      "detection_count": 1,
+      "class_frequency": {
+        "temple_complex": 1
+      }
+    },
+    "explanation": "Event evt_71f7b3116466b052 from drone_001 (temple_complex @ 0.810) was associated with obj_71f7b3116466. Conflicts: none. 1 competing detection(s) considered; rule 'initial_detection' applied (First detection of this object; no competing events.) resulting in class 'temple_complex' at confidence 0.810."
+  },
+  {
+    "decision_id": "dec_000002",
+    "sequence": 2,
+    "object_id": "obj_71f7b3116466",
+    "decision_timestamp": "2025-04-05T18:00:01Z",
+    "trigger_event": {
+      "event_id": "evt_9731dd8f814be16e",
+      "drone_id": "drone_003",
+      "timestamp": "2025-04-05T18:00:01Z",
+      "bbox": [
+        99.0,
+        101.0,
+        199.0,
+        202.0
+      ],
+      "class": "temple_complex",
+      "confidence": 0.9,
+      "metadata": {
+        "lighting": "day"
+      }
+    },
+    "match_iou": 0.9516,
+    "input_events_considered": [
+      {
+        "event_id": "evt_71f7b3116466b052",
+        "drone_id": "drone_001",
+        "timestamp": "2025-04-05T18:00:00Z",
+        "bbox": [
+          100.0,
+          100.0,
+          200.0,
+          200.0
+        ],
+        "class": "temple_complex",
+        "confidence": 0.81,
+        "metadata": {
+          "lighting": "day"
+        }
+      },
+      {
+        "event_id": "evt_9731dd8f814be16e",
+        "drone_id": "drone_003",
+        "timestamp": "2025-04-05T18:00:01Z",
+        "bbox": [
+          99.0,
+          101.0,
+          199.0,
+          202.0
+        ],
+        "class": "temple_complex",
+        "confidence": 0.9,
+        "metadata": {
+          "lighting": "day"
+        }
+      }
+    ],
+    "conflicts": [
+      {
+        "type": "multi_drone_same_object",
+        "drone_ids": [
+          "drone_001",
+          "drone_003"
+        ]
+      }
+    ],
+    "resolution_rule": "unanimous_class",
+    "rule_order": [
+      "higher_confidence",
+      "newer_timestamp",
+      "higher_drone_reliability",
+      "higher_historical_class_frequency",
+      "lexicographic_event_id"
+    ],
+    "rule_evaluations": [],
+    "final_class": "temple_complex",
+    "final_confidence": 0.9,
+    "state_before": {
+      "object_id": "obj_71f7b3116466",
+      "class": "temple_complex",
+      "confidence": 0.81,
+      "bbox": [
+        100.0,
+        100.0,
+        200.0,
+        200.0
+      ],
+      "first_seen": "2025-04-05T18:00:00Z",
+      "last_seen": "2025-04-05T18:00:00Z",
+      "resolved_by_event": "evt_71f7b3116466b052",
+      "created_by_event": "evt_71f7b3116466b052",
+      "drone_ids": [
+        "drone_001"
+      ],
+      "detection_count": 1,
+      "class_frequency": {
+        "temple_complex": 1
+      }
+    },
+    "state_after": {
+      "object_id": "obj_71f7b3116466",
+      "class": "temple_complex",
+      "confidence": 0.9,
+      "bbox": [
+        99.0,
+        101.0,
+        199.0,
+        202.0
+      ],
+      "first_seen": "2025-04-05T18:00:00Z",
+      "last_seen": "2025-04-05T18:00:01Z",
+      "resolved_by_event": "evt_9731dd8f814be16e",
+      "created_by_event": "evt_71f7b3116466b052",
+      "drone_ids": [
+        "drone_001",
+        "drone_003"
+      ],
+      "detection_count": 2,
+      "class_frequency": {
+        "temple_complex": 2
+      }
+    },
+    "explanation": "Event evt_9731dd8f814be16e from drone_003 (temple_complex @ 0.900) was associated with obj_71f7b3116466. Conflicts: multi_drone_same_object. 2 competing detection(s) considered; rule 'unanimous_class' applied (All competing detections agreed on the class label.) resulting in class 'temple_complex' at confidence 0.900."
+  },
+  {
+    "decision_id": "dec_000003",
+    "sequence": 3,
+    "object_id": "obj_71f7b3116466",
+    "decision_timestamp": "2025-04-05T18:00:02Z",
+    "trigger_event": {
+      "event_id": "evt_cf3337810c504bb8",
+      "drone_id": "drone_002",
+      "timestamp": "2025-04-05T18:00:02Z",
+      "bbox": [
+        103.0,
+        98.0,
+        201.0,
+        199.0
+      ],
+      "class": "mosque_ruin",
+      "confidence": 0.86,
+      "metadata": {
+        "lighting": "glare",
+        "occlusion": "partial"
+      }
+    },
+    "match_iou": 0.8884,
+    "input_events_considered": [
+      {
+        "event_id": "evt_71f7b3116466b052",
+        "drone_id": "drone_001",
+        "timestamp": "2025-04-05T18:00:00Z",
+        "bbox": [
+          100.0,
+          100.0,
+          200.0,
+          200.0
+        ],
+        "class": "temple_complex",
+        "confidence": 0.81,
+        "metadata": {
+          "lighting": "day"
+        }
+      },
+      {
+        "event_id": "evt_9731dd8f814be16e",
+        "drone_id": "drone_003",
+        "timestamp": "2025-04-05T18:00:01Z",
+        "bbox": [
+          99.0,
+          101.0,
+          199.0,
+          202.0
+        ],
+        "class": "temple_complex",
+        "confidence": 0.9,
+        "metadata": {
+          "lighting": "day"
+        }
+      },
+      {
+        "event_id": "evt_cf3337810c504bb8",
+        "drone_id": "drone_002",
+        "timestamp": "2025-04-05T18:00:02Z",
+        "bbox": [
+          103.0,
+          98.0,
+          201.0,
+          199.0
+        ],
+        "class": "mosque_ruin",
+        "confidence": 0.86,
+        "metadata": {
+          "lighting": "glare",
+          "occlusion": "partial"
+        }
+      }
+    ],
+    "conflicts": [
+      {
+        "type": "multi_drone_same_object",
+        "drone_ids": [
+          "drone_001",
+          "drone_002",
+          "drone_003"
+        ]
+      },
+      {
+        "type": "conflicting_class_labels",
+        "classes": [
+          "mosque_ruin",
+          "temple_complex"
+        ]
+      }
+    ],
+    "resolution_rule": "higher_confidence",
+    "rule_order": [
+      "higher_confidence",
+      "newer_timestamp",
+      "higher_drone_reliability",
+      "higher_historical_class_frequency",
+      "lexicographic_event_id"
+    ],
+    "rule_evaluations": [
+      {
+        "rule": "higher_confidence",
+        "winner_value": 0.9,
+        "challenger_value": 0.86,
+        "decisive": true
+      }
+    ],
+    "final_class": "temple_complex",
+    "final_confidence": 0.9,
+    "state_before": {
+      "object_id": "obj_71f7b3116466",
+      "class": "temple_complex",
+      "confidence": 0.9,
+      "bbox": [
+        99.0,
+        101.0,
+        199.0,
+        202.0
+      ],
+      "first_seen": "2025-04-05T18:00:00Z",
+      "last_seen": "2025-04-05T18:00:01Z",
+      "resolved_by_event": "evt_9731dd8f814be16e",
+      "created_by_event": "evt_71f7b3116466b052",
+      "drone_ids": [
+        "drone_001",
+        "drone_003"
+      ],
+      "detection_count": 2,
+      "class_frequency": {
+        "temple_complex": 2
+      }
+    },
+    "state_after": {
+      "object_id": "obj_71f7b3116466",
+      "class": "temple_complex",
+      "confidence": 0.9,
+      "bbox": [
+        103.0,
+        98.0,
+        201.0,
+        199.0
+      ],
+      "first_seen": "2025-04-05T18:00:00Z",
+      "last_seen": "2025-04-05T18:00:02Z",
+      "resolved_by_event": "evt_9731dd8f814be16e",
+      "created_by_event": "evt_71f7b3116466b052",
+      "drone_ids": [
+        "drone_001",
+        "drone_002",
+        "drone_003"
+      ],
+      "detection_count": 3,
+      "class_frequency": {
+        "mosque_ruin": 1,
+        "temple_complex": 2
+      }
+    },
+    "explanation": "Event evt_cf3337810c504bb8 from drone_002 (mosque_ruin @ 0.860) was associated with obj_71f7b3116466. Conflicts: multi_drone_same_object, conflicting_class_labels. 3 competing detection(s) considered; rule 'higher_confidence' applied (Chose the detection with the higher confidence score.) resulting in class 'temple_complex' at confidence 0.900."
+  },
+  {
+    "decision_id": "dec_000004",
+    "sequence": 4,
+    "object_id": "obj_984867dbe149",
+    "decision_timestamp": "2025-04-05T18:00:03Z",
+    "trigger_event": {
+      "event_id": "evt_984867dbe149c8bc",
+      "drone_id": "drone_006",
+      "timestamp": "2025-04-05T18:00:03Z",
+      "bbox": [
+        800.0,
+        200.0,
+        900.0,
+        300.0
+      ],
+      "class": "petroglyph",
+      "confidence": 0.77,
+      "metadata": {}
+    },
+    "match_iou": null,
+    "input_events_considered": [
+      {
+        "event_id": "evt_984867dbe149c8bc",
+        "drone_id": "drone_006",
+        "timestamp": "2025-04-05T18:00:03Z",
+        "bbox": [
+          800.0,
+          200.0,
+          900.0,
+          300.0
+        ],
+        "class": "petroglyph",
+        "confidence": 0.77,
+        "metadata": {}
+      }
+    ],
+    "conflicts": [],
+    "resolution_rule": "initial_detection",
+    "rule_order": [
+      "higher_confidence",
+      "newer_timestamp",
+      "higher_drone_reliability",
+      "higher_historical_class_frequency",
+      "lexicographic_event_id"
+    ],
+    "rule_evaluations": [],
+    "final_class": "petroglyph",
+    "final_confidence": 0.77,
+    "state_before": null,
+    "state_after": {
+      "object_id": "obj_984867dbe149",
+      "class": "petroglyph",
+      "confidence": 0.77,
+      "bbox": [
+        800.0,
+        200.0,
+        900.0,
+        300.0
+      ],
+      "first_seen": "2025-04-05T18:00:03Z",
+      "last_seen": "2025-04-05T18:00:03Z",
+      "resolved_by_event": "evt_984867dbe149c8bc",
+      "created_by_event": "evt_984867dbe149c8bc",
+      "drone_ids": [
+        "drone_006"
+      ],
+      "detection_count": 1,
+      "class_frequency": {
+        "petroglyph": 1
+      }
+    },
+    "explanation": "Event evt_984867dbe149c8bc from drone_006 (petroglyph @ 0.770) was associated with obj_984867dbe149. Conflicts: none. 1 competing detection(s) considered; rule 'initial_detection' applied (First detection of this object; no competing events.) resulting in class 'petroglyph' at confidence 0.770."
+  },
+  {
+    "decision_id": "dec_000005",
+    "sequence": 5,
+    "object_id": "obj_bdadc3c55dd7",
+    "decision_timestamp": "2025-04-05T18:00:04Z",
+    "trigger_event": {
+      "event_id": "evt_bdadc3c55dd7780d",
+      "drone_id": "drone_008",
+      "timestamp": "2025-04-05T18:00:04Z",
+      "bbox": [
+        1200.0,
+        1200.0,
+        1300.0,
+        1300.0
+      ],
+      "class": "fort_wall",
+      "confidence": 0.88,
+      "metadata": {}
+    },
+    "match_iou": null,
+    "input_events_considered": [
+      {
+        "event_id": "evt_bdadc3c55dd7780d",
+        "drone_id": "drone_008",
+        "timestamp": "2025-04-05T18:00:04Z",
+        "bbox": [
+          1200.0,
+          1200.0,
+          1300.0,
+          1300.0
+        ],
+        "class": "fort_wall",
+        "confidence": 0.88,
+        "metadata": {}
+      }
+    ],
+    "conflicts": [],
+    "resolution_rule": "initial_detection",
+    "rule_order": [
+      "higher_confidence",
+      "newer_timestamp",
+      "higher_drone_reliability",
+      "higher_historical_class_frequency",
+      "lexicographic_event_id"
+    ],
+    "rule_evaluations": [],
+    "final_class": "fort_wall",
+    "final_confidence": 0.88,
+    "state_before": null,
+    "state_after": {
+      "object_id": "obj_bdadc3c55dd7",
+      "class": "fort_wall",
+      "confidence": 0.88,
+      "bbox": [
+        1200.0,
+        1200.0,
+        1300.0,
+        1300.0
+      ],
+      "first_seen": "2025-04-05T18:00:04Z",
+      "last_seen": "2025-04-05T18:00:04Z",
+      "resolved_by_event": "evt_bdadc3c55dd7780d",
+      "created_by_event": "evt_bdadc3c55dd7780d",
+      "drone_ids": [
+        "drone_008"
+      ],
+      "detection_count": 1,
+      "class_frequency": {
+        "fort_wall": 1
+      }
+    },
+    "explanation": "Event evt_bdadc3c55dd7780d from drone_008 (fort_wall @ 0.880) was associated with obj_bdadc3c55dd7. Conflicts: none. 1 competing detection(s) considered; rule 'initial_detection' applied (First detection of this object; no competing events.) resulting in class 'fort_wall' at confidence 0.880."
+  },
+  {
+    "decision_id": "dec_000006",
+    "sequence": 6,
+    "object_id": "obj_4a38831be45e",
+    "decision_timestamp": "2025-04-05T18:00:05Z",
+    "trigger_event": {
+      "event_id": "evt_4a38831be45e36cc",
+      "drone_id": "drone_004",
+      "timestamp": "2025-04-05T18:00:05Z",
+      "bbox": [
+        500.0,
+        500.0,
+        620.0,
+        640.0
+      ],
+      "class": "stepwell",
+      "confidence": 0.65,
+      "metadata": {
+        "occlusion": "heavy"
+      }
+    },
+    "match_iou": null,
+    "input_events_considered": [
+      {
+        "event_id": "evt_4a38831be45e36cc",
+        "drone_id": "drone_004",
+        "timestamp": "2025-04-05T18:00:05Z",
+        "bbox": [
+          500.0,
+          500.0,
+          620.0,
+          640.0
+        ],
+        "class": "stepwell",
+        "confidence": 0.65,
+        "metadata": {
+          "occlusion": "heavy"
+        }
+      }
+    ],
+    "conflicts": [],
+    "resolution_rule": "initial_detection",
+    "rule_order": [
+      "higher_confidence",
+      "newer_timestamp",
+      "higher_drone_reliability",
+      "higher_historical_class_frequency",
+      "lexicographic_event_id"
+    ],
+    "rule_evaluations": [],
+    "final_class": "stepwell",
+    "final_confidence": 0.65,
+    "state_before": null,
+    "state_after": {
+      "object_id": "obj_4a38831be45e",
+      "class": "stepwell",
+      "confidence": 0.65,
+      "bbox": [
+        500.0,
+        500.0,
+        620.0,
+        640.0
+      ],
+      "first_seen": "2025-04-05T18:00:05Z",
+      "last_seen": "2025-04-05T18:00:05Z",
+      "resolved_by_event": "evt_4a38831be45e36cc",
+      "created_by_event": "evt_4a38831be45e36cc",
+      "drone_ids": [
+        "drone_004"
+      ],
+      "detection_count": 1,
+      "class_frequency": {
+        "stepwell": 1
+      }
+    },
+    "explanation": "Event evt_4a38831be45e36cc from drone_004 (stepwell @ 0.650) was associated with obj_4a38831be45e. Conflicts: none. 1 competing detection(s) considered; rule 'initial_detection' applied (First detection of this object; no competing events.) resulting in class 'stepwell' at confidence 0.650."
+  },
+  {
+    "decision_id": "dec_000007",
+    "sequence": 7,
+    "object_id": "obj_4a38831be45e",
+    "decision_timestamp": "2025-04-05T18:00:06Z",
+    "trigger_event": {
+      "event_id": "evt_37652ed451448fc6",
+      "drone_id": "drone_001",
+      "timestamp": "2025-04-05T18:00:06Z",
+      "bbox": [
+        502.0,
+        499.0,
+        621.0,
+        639.0
+      ],
+      "class": "stepwell",
+      "confidence": 0.65,
+      "metadata": {
+        "occlusion": "none"
+      }
+    },
+    "match_iou": 0.9615,
+    "input_events_considered": [
+      {
+        "event_id": "evt_4a38831be45e36cc",
+        "drone_id": "drone_004",
+        "timestamp": "2025-04-05T18:00:05Z",
+        "bbox": [
+          500.0,
+          500.0,
+          620.0,
+          640.0
+        ],
+        "class": "stepwell",
+        "confidence": 0.65,
+        "metadata": {
+          "occlusion": "heavy"
+        }
+      },
+      {
+        "event_id": "evt_37652ed451448fc6",
+        "drone_id": "drone_001",
+        "timestamp": "2025-04-05T18:00:06Z",
+        "bbox": [
+          502.0,
+          499.0,
+          621.0,
+          639.0
+        ],
+        "class": "stepwell",
+        "confidence": 0.65,
+        "metadata": {
+          "occlusion": "none"
+        }
+      }
+    ],
+    "conflicts": [
+      {
+        "type": "multi_drone_same_object",
+        "drone_ids": [
+          "drone_001",
+          "drone_004"
+        ]
+      }
+    ],
+    "resolution_rule": "unanimous_class",
+    "rule_order": [
+      "higher_confidence",
+      "newer_timestamp",
+      "higher_drone_reliability",
+      "higher_historical_class_frequency",
+      "lexicographic_event_id"
+    ],
+    "rule_evaluations": [],
+    "final_class": "stepwell",
+    "final_confidence": 0.65,
+    "state_before": {
+      "object_id": "obj_4a38831be45e",
+      "class": "stepwell",
+      "confidence": 0.65,
+      "bbox": [
+        500.0,
+        500.0,
+        620.0,
+        640.0
+      ],
+      "first_seen": "2025-04-05T18:00:05Z",
+      "last_seen": "2025-04-05T18:00:05Z",
+      "resolved_by_event": "evt_4a38831be45e36cc",
+      "created_by_event": "evt_4a38831be45e36cc",
+      "drone_ids": [
+        "drone_004"
+      ],
+      "detection_count": 1,
+      "class_frequency": {
+        "stepwell": 1
+      }
+    },
+    "state_after": {
+      "object_id": "obj_4a38831be45e",
+      "class": "stepwell",
+      "confidence": 0.65,
+      "bbox": [
+        502.0,
+        499.0,
+        621.0,
+        639.0
+      ],
+      "first_seen": "2025-04-05T18:00:05Z",
+      "last_seen": "2025-04-05T18:00:06Z",
+      "resolved_by_event": "evt_37652ed451448fc6",
+      "created_by_event": "evt_4a38831be45e36cc",
+      "drone_ids": [
+        "drone_001",
+        "drone_004"
+      ],
+      "detection_count": 2,
+      "class_frequency": {
+        "stepwell": 2
+      }
+    },
+    "explanation": "Event evt_37652ed451448fc6 from drone_001 (stepwell @ 0.650) was associated with obj_4a38831be45e. Conflicts: multi_drone_same_object. 2 competing detection(s) considered; rule 'unanimous_class' applied (All competing detections agreed on the class label.) resulting in class 'stepwell' at confidence 0.650."
+  },
+  {
+    "decision_id": "dec_000008",
+    "sequence": 8,
+    "object_id": "obj_4a38831be45e",
+    "decision_timestamp": "2025-04-05T18:00:06Z",
+    "trigger_event": {
+      "event_id": "evt_3186dcf76d4eda04",
+      "drone_id": "drone_005",
+      "timestamp": "2025-04-05T18:00:06Z",
+      "bbox": [
+        498.0,
+        503.0,
+        618.0,
+        641.0
+      ],
+      "class": "burial_mound",
+      "confidence": 0.65,
+      "metadata": {
+        "occlusion": "heavy"
+      }
+    },
+    "match_iou": 0.9044,
+    "input_events_considered": [
+      {
+        "event_id": "evt_4a38831be45e36cc",
+        "drone_id": "drone_004",
+        "timestamp": "2025-04-05T18:00:05Z",
+        "bbox": [
+          500.0,
+          500.0,
+          620.0,
+          640.0
+        ],
+        "class": "stepwell",
+        "confidence": 0.65,
+        "metadata": {
+          "occlusion": "heavy"
+        }
+      },
+      {
+        "event_id": "evt_37652ed451448fc6",
+        "drone_id": "drone_001",
+        "timestamp": "2025-04-05T18:00:06Z",
+        "bbox": [
+          502.0,
+          499.0,
+          621.0,
+          639.0
+        ],
+        "class": "stepwell",
+        "confidence": 0.65,
+        "metadata": {
+          "occlusion": "none"
+        }
+      },
+      {
+        "event_id": "evt_3186dcf76d4eda04",
+        "drone_id": "drone_005",
+        "timestamp": "2025-04-05T18:00:06Z",
+        "bbox": [
+          498.0,
+          503.0,
+          618.0,
+          641.0
+        ],
+        "class": "burial_mound",
+        "confidence": 0.65,
+        "metadata": {
+          "occlusion": "heavy"
+        }
+      }
+    ],
+    "conflicts": [
+      {
+        "type": "multi_drone_same_object",
+        "drone_ids": [
+          "drone_001",
+          "drone_004",
+          "drone_005"
+        ]
+      },
+      {
+        "type": "conflicting_class_labels",
+        "classes": [
+          "burial_mound",
+          "stepwell"
+        ]
+      }
+    ],
+    "resolution_rule": "higher_drone_reliability",
+    "rule_order": [
+      "higher_confidence",
+      "newer_timestamp",
+      "higher_drone_reliability",
+      "higher_historical_class_frequency",
+      "lexicographic_event_id"
+    ],
+    "rule_evaluations": [
+      {
+        "rule": "higher_confidence",
+        "winner_value": 0.65,
+        "challenger_value": 0.65,
+        "decisive": false
+      },
+      {
+        "rule": "newer_timestamp",
+        "winner_value": "2025-04-05T18:00:06Z",
+        "challenger_value": "2025-04-05T18:00:06Z",
+        "decisive": false
+      },
+      {
+        "rule": "higher_drone_reliability",
+        "winner_value": 0.95,
+        "challenger_value": 0.7,
+        "decisive": true
+      }
+    ],
+    "final_class": "stepwell",
+    "final_confidence": 0.65,
+    "state_before": {
+      "object_id": "obj_4a38831be45e",
+      "class": "stepwell",
+      "confidence": 0.65,
+      "bbox": [
+        502.0,
+        499.0,
+        621.0,
+        639.0
+      ],
+      "first_seen": "2025-04-05T18:00:05Z",
+      "last_seen": "2025-04-05T18:00:06Z",
+      "resolved_by_event": "evt_37652ed451448fc6",
+      "created_by_event": "evt_4a38831be45e36cc",
+      "drone_ids": [
+        "drone_001",
+        "drone_004"
+      ],
+      "detection_count": 2,
+      "class_frequency": {
+        "stepwell": 2
+      }
+    },
+    "state_after": {
+      "object_id": "obj_4a38831be45e",
+      "class": "stepwell",
+      "confidence": 0.65,
+      "bbox": [
+        498.0,
+        503.0,
+        618.0,
+        641.0
+      ],
+      "first_seen": "2025-04-05T18:00:05Z",
+      "last_seen": "2025-04-05T18:00:06Z",
+      "resolved_by_event": "evt_37652ed451448fc6",
+      "created_by_event": "evt_4a38831be45e36cc",
+      "drone_ids": [
+        "drone_001",
+        "drone_004",
+        "drone_005"
+      ],
+      "detection_count": 3,
+      "class_frequency": {
+        "burial_mound": 1,
+        "stepwell": 2
+      }
+    },
+    "explanation": "Event evt_3186dcf76d4eda04 from drone_005 (burial_mound @ 0.650) was associated with obj_4a38831be45e. Conflicts: multi_drone_same_object, conflicting_class_labels. 3 competing detection(s) considered; rule 'higher_drone_reliability' applied (Confidence and timestamp tied; chose the more reliable drone.) resulting in class 'stepwell' at confidence 0.650."
+  },
+  {
+    "decision_id": "dec_000009",
+    "sequence": 9,
+    "object_id": "obj_984867dbe149",
+    "decision_timestamp": "2025-04-05T18:00:09Z",
+    "trigger_event": {
+      "event_id": "evt_cd1f13fa1ea2650d",
+      "drone_id": "drone_006",
+      "timestamp": "2025-04-05T18:00:09Z",
+      "bbox": [
+        801.0,
+        199.0,
+        899.0,
+        301.0
+      ],
+      "class": "rock_shelter",
+      "confidence": 0.79,
+      "metadata": {}
+    },
+    "match_iou": 0.9612,
+    "input_events_considered": [
+      {
+        "event_id": "evt_984867dbe149c8bc",
+        "drone_id": "drone_006",
+        "timestamp": "2025-04-05T18:00:03Z",
+        "bbox": [
+          800.0,
+          200.0,
+          900.0,
+          300.0
+        ],
+        "class": "petroglyph",
+        "confidence": 0.77,
+        "metadata": {}
+      },
+      {
+        "event_id": "evt_cd1f13fa1ea2650d",
+        "drone_id": "drone_006",
+        "timestamp": "2025-04-05T18:00:09Z",
+        "bbox": [
+          801.0,
+          199.0,
+          899.0,
+          301.0
+        ],
+        "class": "rock_shelter",
+        "confidence": 0.79,
+        "metadata": {}
+      }
+    ],
+    "conflicts": [
+      {
+        "type": "conflicting_class_labels",
+        "classes": [
+          "petroglyph",
+          "rock_shelter"
+        ]
+      },
+      {
+        "type": "class_change_over_time",
+        "from": "petroglyph",
+        "to": "rock_shelter"
+      }
+    ],
+    "resolution_rule": "higher_confidence",
+    "rule_order": [
+      "higher_confidence",
+      "newer_timestamp",
+      "higher_drone_reliability",
+      "higher_historical_class_frequency",
+      "lexicographic_event_id"
+    ],
+    "rule_evaluations": [
+      {
+        "rule": "higher_confidence",
+        "winner_value": 0.79,
+        "challenger_value": 0.77,
+        "decisive": true
+      }
+    ],
+    "final_class": "rock_shelter",
+    "final_confidence": 0.79,
+    "state_before": {
+      "object_id": "obj_984867dbe149",
+      "class": "petroglyph",
+      "confidence": 0.77,
+      "bbox": [
+        800.0,
+        200.0,
+        900.0,
+        300.0
+      ],
+      "first_seen": "2025-04-05T18:00:03Z",
+      "last_seen": "2025-04-05T18:00:03Z",
+      "resolved_by_event": "evt_984867dbe149c8bc",
+      "created_by_event": "evt_984867dbe149c8bc",
+      "drone_ids": [
+        "drone_006"
+      ],
+      "detection_count": 1,
+      "class_frequency": {
+        "petroglyph": 1
+      }
+    },
+    "state_after": {
+      "object_id": "obj_984867dbe149",
+      "class": "rock_shelter",
+      "confidence": 0.79,
+      "bbox": [
+        801.0,
+        199.0,
+        899.0,
+        301.0
+      ],
+      "first_seen": "2025-04-05T18:00:03Z",
+      "last_seen": "2025-04-05T18:00:09Z",
+      "resolved_by_event": "evt_cd1f13fa1ea2650d",
+      "created_by_event": "evt_984867dbe149c8bc",
+      "drone_ids": [
+        "drone_006"
+      ],
+      "detection_count": 2,
+      "class_frequency": {
+        "petroglyph": 1,
+        "rock_shelter": 1
+      }
+    },
+    "explanation": "Event evt_cd1f13fa1ea2650d from drone_006 (rock_shelter @ 0.790) was associated with obj_984867dbe149. Conflicts: conflicting_class_labels, class_change_over_time. 2 competing detection(s) considered; rule 'higher_confidence' applied (Chose the detection with the higher confidence score.) resulting in class 'rock_shelter' at confidence 0.790."
+  },
+  {
+    "decision_id": "dec_000010",
+    "sequence": 10,
+    "object_id": "obj_984867dbe149",
+    "decision_timestamp": "2025-04-05T18:00:12Z",
+    "trigger_event": {
+      "event_id": "evt_534e0efd3bac4266",
+      "drone_id": "drone_007",
+      "timestamp": "2025-04-05T18:00:12Z",
+      "bbox": [
+        799.0,
+        201.0,
+        901.0,
+        299.0
+      ],
+      "class": "petroglyph",
+      "confidence": 0.95,
+      "metadata": {}
+    },
+    "match_iou": 0.9245,
+    "input_events_considered": [
+      {
+        "event_id": "evt_984867dbe149c8bc",
+        "drone_id": "drone_006",
+        "timestamp": "2025-04-05T18:00:03Z",
+        "bbox": [
+          800.0,
+          200.0,
+          900.0,
+          300.0
+        ],
+        "class": "petroglyph",
+        "confidence": 0.77,
+        "metadata": {}
+      },
+      {
+        "event_id": "evt_cd1f13fa1ea2650d",
+        "drone_id": "drone_006",
+        "timestamp": "2025-04-05T18:00:09Z",
+        "bbox": [
+          801.0,
+          199.0,
+          899.0,
+          301.0
+        ],
+        "class": "rock_shelter",
+        "confidence": 0.79,
+        "metadata": {}
+      },
+      {
+        "event_id": "evt_534e0efd3bac4266",
+        "drone_id": "drone_007",
+        "timestamp": "2025-04-05T18:00:12Z",
+        "bbox": [
+          799.0,
+          201.0,
+          901.0,
+          299.0
+        ],
+        "class": "petroglyph",
+        "confidence": 0.95,
+        "metadata": {}
+      }
+    ],
+    "conflicts": [
+      {
+        "type": "multi_drone_same_object",
+        "drone_ids": [
+          "drone_006",
+          "drone_007"
+        ]
+      },
+      {
+        "type": "conflicting_class_labels",
+        "classes": [
+          "petroglyph",
+          "rock_shelter"
+        ]
+      },
+      {
+        "type": "class_change_over_time",
+        "from": "rock_shelter",
+        "to": "petroglyph"
+      },
+      {
+        "type": "class_reverted",
+        "class": "petroglyph",
+        "previous_assignments": 1
+      }
+    ],
+    "resolution_rule": "higher_confidence",
+    "rule_order": [
+      "higher_confidence",
+      "newer_timestamp",
+      "higher_drone_reliability",
+      "higher_historical_class_frequency",
+      "lexicographic_event_id"
+    ],
+    "rule_evaluations": [
+      {
+        "rule": "higher_confidence",
+        "winner_value": 0.95,
+        "challenger_value": 0.79,
+        "decisive": true
+      }
+    ],
+    "final_class": "petroglyph",
+    "final_confidence": 0.95,
+    "state_before": {
+      "object_id": "obj_984867dbe149",
+      "class": "rock_shelter",
+      "confidence": 0.79,
+      "bbox": [
+        801.0,
+        199.0,
+        899.0,
+        301.0
+      ],
+      "first_seen": "2025-04-05T18:00:03Z",
+      "last_seen": "2025-04-05T18:00:09Z",
+      "resolved_by_event": "evt_cd1f13fa1ea2650d",
+      "created_by_event": "evt_984867dbe149c8bc",
+      "drone_ids": [
+        "drone_006"
+      ],
+      "detection_count": 2,
+      "class_frequency": {
+        "petroglyph": 1,
+        "rock_shelter": 1
+      }
+    },
+    "state_after": {
+      "object_id": "obj_984867dbe149",
+      "class": "petroglyph",
+      "confidence": 0.95,
+      "bbox": [
+        799.0,
+        201.0,
+        901.0,
+        299.0
+      ],
+      "first_seen": "2025-04-05T18:00:03Z",
+      "last_seen": "2025-04-05T18:00:12Z",
+      "resolved_by_event": "evt_534e0efd3bac4266",
+      "created_by_event": "evt_984867dbe149c8bc",
+      "drone_ids": [
+        "drone_006",
+        "drone_007"
+      ],
+      "detection_count": 3,
+      "class_frequency": {
+        "petroglyph": 2,
+        "rock_shelter": 1
+      }
+    },
+    "explanation": "Event evt_534e0efd3bac4266 from drone_007 (petroglyph @ 0.950) was associated with obj_984867dbe149. Conflicts: multi_drone_same_object, conflicting_class_labels, class_change_over_time, class_reverted. 3 competing detection(s) considered; rule 'higher_confidence' applied (Chose the detection with the higher confidence score.) resulting in class 'petroglyph' at confidence 0.950."
+  }
+]
